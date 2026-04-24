@@ -2,7 +2,7 @@
 import os, time, json, sys, urllib.request, urllib.error
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN") or "8701250025:AAGQQTzKvLmnuEt_VPPHD3BWurUnWSEldkA"
-WEB_URL   = "https://pillrave.com"
+WEB_URL   = "https://cyberavers.online.com"
 PUMP_URL  = "https://pump.fun"
 API       = "https://api.telegram.org/bot" + BOT_TOKEN
 
