@@ -2,7 +2,7 @@
 import os, time, json, sys, urllib.request, urllib.error
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN") or "8701250025:AAGQQTzKvLmnuEt_VPPHD3BWurUnWSEldkA"
-WEB_URL   = "https://cyberavers.online.com"
+WEB_URL   = "https://pillrave.com"
 PUMP_URL  = "https://pump.fun"
 API       = "https://api.telegram.org/bot" + BOT_TOKEN
 
@@ -68,6 +68,49 @@ MSGS = {
 "pillrave.com\n\n"
 "Sin KYC. Sin intermediarios. 100% on-chain."
 ),
+
+"welcome": (
+"[ CONNECTION ESTABLISHED ] 📶
+
+"
+"Welcome to the Late Night Society headquarters, Operator.
+
+"
+"You have bypassed the static and entered the core of the
+"
+"Cyberavers // PILLRAVE network. This isn't a hype train;
+"
+"it's a mission to restore the underground.
+
+"
+"CURRENT PROTOCOLS:
+
+"
+"* The Mission: Defrosting the rave culture since 1992.
+"
+"* The Tech: Real-time audio fingerprinting & producer rewards.
+"
+"* The Drop: Wednesday @ Pump.fun.
+
+"
+"RULES OF THE GRID:
+
+"
+"1. No FUD. Only Logic.
+"
+"2. Respect the OGs. We value the legacy.
+"
+"3. Verify the Stack. Check the pinned legal docs before engaging.
+
+"
+"The night is long. The signal is pure.
+
+"
+"💊 [ TAKE THE PILL ]
+
+"
+"Commands: /token /roadmap /comprar /info /web"
+),
 }
 
 def call(m, d=None):
@@ -101,7 +144,7 @@ def send_menu(cid, txt):
     })
 
 def get_upd(off=None):
-    d = {"timeout": 30, "allowed_updates": ["message"]}
+    d = {"timeout": 30, "allowed_updates": ["message", "chat_member"]}
     if off:
         d["offset"] = off
     p = json.dumps(d).encode()
@@ -139,8 +182,21 @@ def load():
 
 def handle(msg):
     cid  = msg["chat"]["id"]
-    txt  = msg.get("text", "").strip().split("@")[0].lower()
     user = msg.get("from", {}).get("first_name", "Raver")
+    # Handle new members joining
+    new_members = msg.get("new_chat_members", [])
+    if new_members:
+        for member in new_members:
+            if not member.get("is_bot", False):
+                name = member.get("first_name", "Operator")
+                greeting = "[ CONNECTION ESTABLISHED ]
+
+Welcome " + name + "!
+
+" + MSGS["welcome"]
+                send_menu(cid, greeting)
+        return
+    txt  = msg.get("text", "").strip().split("@")[0].lower()
     print("[MSG] " + user + ": " + txt)
     if not load():
         save(cid)
