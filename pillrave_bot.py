@@ -2,7 +2,7 @@
 import os, time, json, sys, urllib.request, urllib.error
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN") or "8701250025:AAGQQTzKvLmnuEt_VPPHD3BWurUnWSEldkA"
-WEB_URL   = "https://pillrave.com"
+WEB_URL   = "https://cyberavers.online"
 PUMP_URL  = "https://pump.fun"
 API       = "https://api.telegram.org/bot" + BOT_TOKEN
 
@@ -105,7 +105,7 @@ def send_menu(cid, txt):
         "text": txt,
         "reply_markup": {
             "inline_keyboard": [
-                [{"text": "Comprar $PILL", "url": PUMP_URL}, {"text": "Web oficial", "url": WEB_URL}],
+                [{"text": "BUY $PILL", "url": PUMP_URL}, {"text": "WEBSITE", "url": WEB_URL}],
                 [{"text": "Instagram", "url": "https://instagram.com/cybarravers"}, {"text": "Twitter/X", "url": "https://x.com/CyberRaversNFT"}]
             ]
         }
