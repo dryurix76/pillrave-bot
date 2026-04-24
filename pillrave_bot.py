@@ -11,7 +11,7 @@ import requests
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "PEGA_TU_NUEVO_TOKEN_AQUI")
 CHAT_ID   = os.environ.get("CHAT_ID", None)
-WEB_URL   = "https://pillrave.com"
+WEB_URL   = "https://cyberavers.online.com"
 PUMP_URL  = "https://pump.fun"
 API       = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
