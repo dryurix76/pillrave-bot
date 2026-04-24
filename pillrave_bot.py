@@ -6,9 +6,25 @@ WEB_URL   = "https://pillrave.com"
 PUMP_URL  = "https://pump.fun"
 API       = "https://api.telegram.org/bot" + BOT_TOKEN
 
+WELCOME = ("[ CONNECTION ESTABLISHED ] 📶\n\n"
+"Welcome to the Late Night Society headquarters, Operator.\n\n"
+"You have bypassed the static and entered the core of the "
+"Cyberavers // PILLRAVE network. This isn't a hype train; "
+"it's a mission to restore the underground.\n\n"
+"CURRENT PROTOCOLS:\n"
+"* The Mission: Defrosting the rave culture since 1992.\n"
+"* The Tech: Real-time audio fingerprinting & producer rewards.\n"
+"* The Drop: Wednesday @ Pump.fun.\n\n"
+"RULES OF THE GRID:\n"
+"1. No FUD. Only Logic.\n"
+"2. Respect the OGs. We value the legacy.\n"
+"3. Verify the Stack. Check the pinned legal docs before engaging.\n\n"
+"The night is long. The signal is pure.\n\n"
+"💊 [ TAKE THE PILL ]\n\n"
+"Commands: /token /roadmap /comprar /info /web")
+
 MSGS = {
-"start": (
-"Bienvenido al grupo oficial de PILLRAVE\n\n"
+"start": ("Bienvenido al grupo oficial de PILLRAVE\n\n"
 "El token de la musica electronica en Solana\n\n"
 "Comandos:\n"
 "/info - Historia del proyecto\n"
@@ -18,30 +34,24 @@ MSGS = {
 "/web - Web oficial\n\n"
 "pillrave.com\n"
 "Instagram: @CYBERRAVERS\n"
-"Twitter: @CyberRaversNFT"
-),
-"info": (
-"THE FROZEN ARE BACK\n\n"
+"Twitter: @CyberRaversNFT"),
+"info": ("THE FROZEN ARE BACK\n\n"
 "En 1992 la musica electronica era un codigo de libertad.\n\n"
 "En los 90, la policia cerraba los clubes a las 2 AM.\n"
-"Las Berkshire Mountains ofrecian bailar bajo las estrellas\n"
+"Las Berkshire Mountains ofrecian bailar bajo las estrellas "
 "sin que nadie tocara a la puerta.\n\n"
 "Hoy PILLRAVE es el descongelamiento de esa vision.\n"
 "La senal ha vuelto.\n\n"
-"Berkshire Mountain, MA - 12.31.1999 - 06:13 AM"
-),
-"token": (
-"TOKENOMICS $PILL\n\n"
+"Berkshire Mountain, MA - 12.31.1999 - 06:13 AM"),
+"token": ("TOKENOMICS $PILL\n\n"
 "Venta publica: 80% - 727.2M tokens\n"
 "Equipo y Dev: 15% - 136.35M (vesting 12 meses)\n"
 "Airdrops y Rewards: 10% - 90.9M tokens\n\n"
 "Supply total: 909,000,000 $PILL\n"
 "Blockchain: Solana\n"
 "Plataforma: Pump.fun\n\n"
-"Distribucion 100% justa. Sin wallets bloqueadas."
-),
-"roadmap": (
-"ROADMAP PILLRAVE\n\n"
+"Distribucion 100% justa. Sin wallets bloqueadas."),
+"roadmap": ("ROADMAP PILLRAVE\n\n"
 "FASE 0 - AHORA\n"
 "- Token en Solana via Pump.fun\n"
 "- Landing y branding activo\n\n"
@@ -55,62 +65,15 @@ MSGS = {
 "- DAO lanzada\n\n"
 "FASE 3 - 2027+\n"
 "- Festivales grandes\n"
-"- App publica global\n"
-"- Estandar global de royalties"
-),
-"comprar": (
-"COMO COMPRAR $PILL\n\n"
+"- App publica global"),
+"comprar": ("COMO COMPRAR $PILL\n\n"
 "1. Instala Phantom o Solflare (wallet Solana)\n"
 "2. Compra algo de SOL para el gas\n"
 "3. Ve a pump.fun y busca $PILL\n"
 "4. Compra y HOLD\n\n"
 "pump.fun\n"
 "pillrave.com\n\n"
-"Sin KYC. Sin intermediarios. 100% on-chain."
-),
-
-"welcome": (
-"[ CONNECTION ESTABLISHED ] 📶
-
-"
-"Welcome to the Late Night Society headquarters, Operator.
-
-"
-"You have bypassed the static and entered the core of the
-"
-"Cyberavers // PILLRAVE network. This isn't a hype train;
-"
-"it's a mission to restore the underground.
-
-"
-"CURRENT PROTOCOLS:
-
-"
-"* The Mission: Defrosting the rave culture since 1992.
-"
-"* The Tech: Real-time audio fingerprinting & producer rewards.
-"
-"* The Drop: Wednesday @ Pump.fun.
-
-"
-"RULES OF THE GRID:
-
-"
-"1. No FUD. Only Logic.
-"
-"2. Respect the OGs. We value the legacy.
-"
-"3. Verify the Stack. Check the pinned legal docs before engaging.
-
-"
-"The night is long. The signal is pure.
-
-"
-"💊 [ TAKE THE PILL ]
-
-"
-"Commands: /token /roadmap /comprar /info /web"
-),
+"Sin KYC. Sin intermediarios. 100% on-chain."),
 }
 
 def call(m, d=None):
@@ -181,21 +144,17 @@ def load():
         return None
 
 def handle(msg):
-    cid  = msg["chat"]["id"]
+    cid = msg["chat"]["id"]
     user = msg.get("from", {}).get("first_name", "Raver")
-    # Handle new members joining
+    # Bienvenida automatica a nuevos miembros
     new_members = msg.get("new_chat_members", [])
     if new_members:
         for member in new_members:
             if not member.get("is_bot", False):
                 name = member.get("first_name", "Operator")
-                greeting = "[ CONNECTION ESTABLISHED ]
-
-Welcome " + name + "!
-
-" + MSGS["welcome"]
-                send_menu(cid, greeting)
+                send_menu(cid, "Welcome " + name + "!\n\n" + WELCOME)
         return
+    # Comandos
     txt = msg.get("text", "")
     if not txt:
         return
@@ -225,15 +184,15 @@ Welcome " + name + "!
 def main():
     print("==================================================")
     print("  PILLRAVE BOT - Railway Edition")
-    print("  Token activo: " + BOT_TOKEN[:20] + "...")
+    print("  Token: " + BOT_TOKEN[:20] + "...")
     print("==================================================")
     me = call("getMe")
     if not me or not me.get("ok"):
-        print("[ERR] Token invalido: " + str(me))
+        print("[ERR] Token invalido")
         return
     print("[OK] Bot activo: @" + me["result"]["username"])
     c = load()
-    print("[OK] Chat ID previo: " + str(c or "ninguno"))
+    print("[OK] Chat ID: " + str(c or "ninguno"))
     print("[INFO] Escuchando mensajes...\n")
     off = None
     while True:
