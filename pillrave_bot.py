@@ -144,7 +144,7 @@ def send_menu(cid, txt):
     })
 
 def get_upd(off=None):
-    d = {"timeout": 30, "allowed_updates": ["message", "chat_member"]}
+    d = {"timeout": 30, "allowed_updates": ["message"]}
     if off:
         d["offset"] = off
     p = json.dumps(d).encode()
@@ -196,7 +196,10 @@ Welcome " + name + "!
 " + MSGS["welcome"]
                 send_menu(cid, greeting)
         return
-    txt  = msg.get("text", "").strip().split("@")[0].lower()
+    txt = msg.get("text", "")
+    if not txt:
+        return
+    txt = txt.strip().split("@")[0].lower()
     print("[MSG] " + user + ": " + txt)
     if not load():
         save(cid)
