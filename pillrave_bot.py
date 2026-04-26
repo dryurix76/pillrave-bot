@@ -353,8 +353,7 @@ def format_track(t):
         + t["label"] + "\n"
         + t["genre"] + "\n\n"
         + t["note"] + "\n\n"
-        + "#underground #rave #pillrave #" + t["genre"].lower().replace(" ","").replace("/","") + "\n\n"
-        + t["url"]
+        + "#underground #rave #pillrave #" + t["genre"].lower().replace(" ","").replace("/","")
     )
 
 def call(m, d=None):
@@ -460,7 +459,9 @@ def handle(msg):
     elif txt == "/chatid":
         send(cid, "Chat ID: " + str(cid))
     elif txt in ("/track", "/trackdeldia"):
-        send(cid, format_track(get_daily_track()))
+        t = get_daily_track()
+        send(cid, format_track(t))
+        send(cid, t["url"])
     elif txt.startswith("/anuncio "):
         c = load()
         if c:
@@ -475,11 +476,12 @@ def auto_post_track():
     if hour == 12 and last_track_day != today:
         cid = load()
         if cid:
-            track_msg = format_track(get_daily_track())
-            result = send(int(cid), track_msg)
+            t = get_daily_track()
+            send(int(cid), format_track(t))
+            result = send(int(cid), t["url"])
             if result and result.get("ok"):
                 last_track_day = today
-                print("[TRACK] Track del dia publicado: " + get_daily_track()["title"])
+                print("[TRACK] Track del dia publicado: " + t["title"])
 
 def main():
     print("==================================================")
