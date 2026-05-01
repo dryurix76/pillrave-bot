@@ -5,7 +5,7 @@ import re
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN") or "8701250025:AAGQQTzKvLmnuEt_VPPHD3BWurUnWSEldkA"
 WEB_URL   = "https://cyberavers.online"
-PUMP_URL  = "https://pump.fun"
+PUMP_URL  = "https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
 API       = "https://api.telegram.org/bot" + BOT_TOKEN
 
 # ─── TRACK OF THE DAY — 30 underground classics ─────────────────
@@ -297,7 +297,7 @@ WELCOME = ("[ CONNECTION ESTABLISHED ] 📶\n\n"
 "3. Verify the Stack. Check the pinned legal docs before engaging.\n\n"
 "The night is long. The signal is pure.\n\n"
 "💊 [ TAKE THE PILL ]\n\n"
-"Commands: /token /roadmap /buy /info /web /track /mix /news /price /dao")
+"Commands: /token /roadmap /buy /info /web /track /mix /news /price /dao /launch /safety")
 
 MSGS = {
 "info": ("THE FROZEN ARE BACK\n\n"
@@ -413,6 +413,48 @@ MSGS = {
 "The code is the DJ. The dance floor is the blockchain.\n"
 "And you are the Promoter. Step up and take control of the culture."
 ),
+
+"launch": (
+"[ SYSTEM DEPLOYED // THE ANTIDOTE IS HERE ] 💊\n\n"
+"The wait is over. The PILLRAVE protocol is now officially live on the Grid.\n"
+"We are no longer just a concept; we are infrastructure.\n\n"
+"WHAT HAPPENS NOW?\n\n"
+"1. Fair Launch: The market is now open. No insiders, no private rounds.\n\n"
+"2. Utility First: $PILL powers real-time audio identification and the DAO.\n\n"
+"3. The After: Once the bond curve is met, Staking and DAO Proposals\n"
+"   will be initialized next week.\n\n"
+"VERIFY BEFORE YOU ACT:\n"
+"Always check the URL. Ensure you are on the official cyberavers.online\n"
+"and following links from this pinned message.\n\n"
+"THE NIGHT HAS JUST BEGUN.\n"
+"[ STATUS: OPERATIONAL ]"
+),
+"safety": (
+"[ SECURITY PROTOCOL ACTIVATED ] 📶\n\n"
+"🛡️ SAFEGUARDING THE GRID: INVESTOR SAFETY GUIDE\n\n"
+"In the Late Night Society, we build for the long term.\n"
+"Knowledge is your best encryption.\n\n"
+"1. THE OFFICIAL CONTRACT 📜\n"
+"- We will NEVER DM you a contract address.\n"
+"- The only valid Pump.fun link is posted in this channel and on our X profile.\n"
+"- Always cross-reference the Mint Address across our official platforms.\n\n"
+"2. NO PRIVATE SALES 🚫\n"
+"- PILLRAVE is a 100% Fair Launch.\n"
+"- No seed rounds, no private presales, no special allocations.\n"
+"- Anyone claiming to sell $PILL before official launch is a bad actor.\n\n"
+"3. WALLET HYGIENE 🦾\n"
+"- No Cyberavers team member will ever ask for your seed phrase or private keys.\n"
+"- Use a burner wallet for new mints. Keep main assets in cold storage.\n\n"
+"4. UNDERSTAND THE UTILITY ⚖️\n"
+"- $PILL is a Utility Token powering the PILLRAVE audio-identification protocol and DAO.\n"
+"- Read our Legal Framework and AML Policy at cyberavers.online before participating.\n\n"
+"5. THE AFTER PROTOCOL (STAKING) 🧪\n"
+"- Locking periods: 7, 30 and 90 days.\n"
+"- Governance is a responsibility, not just a reward.\n\n"
+"Stay alert. Stay decentralized.\n"
+"🌐 cyberavers.online\n"
+"[ SIGNAL: PROTECTED ]"
+),
 "comprar": ("HOW TO BUY $PILL\n\n"
 "1. Install Phantom or Solflare (Solana wallet)\n"
 "2. Buy some SOL for gas fees\n"
@@ -490,14 +532,14 @@ def auto_post_prices():
     today = now.date()
     hour = now.hour
     # Post prices at 9 AM every day
-    if hour == 9 and last_price_day != today:
+    if hour == 9 and now.minute == 0 and last_price_day != today:
         cid = load()
         if not cid:
             return
+        last_price_day = today  # Set first to prevent double-posting
         p = fetch_prices()
         if p:
             send(int(cid), format_prices(p))
-            last_price_day = today
             print("[PRICE] Prices posted: SOL=$" + str(p["sol"]) + " BTC=$" + str(p["btc"]))
 
 BANDCAMP_FEEDS = [
@@ -651,7 +693,7 @@ def auto_post_news():
     global last_news_time
     now = datetime.now()
     # Post every 6 hours
-    if last_news_time and (now - last_news_time) < timedelta(hours=6):
+    if last_news_time and (now - last_news_time) < timedelta(hours=6, minutes=-5):
         return
     cid = load()
     if not cid:
@@ -710,7 +752,7 @@ def send_menu(cid, txt):
         "disable_web_page_preview": False,
         "reply_markup": {
             "inline_keyboard": [
-                [{"text": "BUY $PILL", "url": PUMP_URL},
+                [{"text": "BUY PILLRAVE", "url": PUMP_URL},
                  {"text": "WEBSITE",   "url": WEB_URL}],
                 [{"text": "Instagram", "url": "https://instagram.com/cybarravers"},
                  {"text": "Twitter/X", "url": "https://x.com/CyberRaversNFT"}]
@@ -814,6 +856,20 @@ def handle(msg):
         t = get_daily_track()
         send(cid, format_track(t))
         send(cid, t["url"])
+    elif txt in ("/blast", "/announce_all"):
+        # Post full launch sequence to group
+        c = load()
+        if c:
+            send_menu(int(c), MSGS["launch"])
+            send(int(c), "https://www.youtube.com/watch?v=BDj73pGQ6pE")
+            import time as _t; _t.sleep(2)
+            send_menu(int(c), MSGS["safety"])
+            send(cid, "Blast sent to group.")
+    elif txt in ("/launch", "/live", "/protocol"):
+        send_menu(cid, MSGS["launch"])
+        send(cid, "https://www.youtube.com/watch?v=BDj73pGQ6pE")
+    elif txt in ("/safety", "/security", "/safe"):
+        send_menu(cid, MSGS["safety"])
     elif txt in ("/dao", "/governance"):
         send_menu(cid, MSGS["dao"])
     elif txt == "/tiers":
@@ -856,16 +912,16 @@ def auto_post_sc_mix():
     today = now.date()
     hour = now.hour
     # Post SC mix at 8 PM every day
-    if hour == 20 and last_sc_day != today:
+    if hour == 20 and now.minute == 0 and last_sc_day != today:
         cid = load()
         if not cid:
             return
+        last_sc_day = today  # Set first to prevent double-posting
         item = fetch_sc_mix()
         if item and item["link"] not in SC_POSTED:
             SC_POSTED.add(item["link"])
             send(int(cid), format_sc_mix(item))
             send(int(cid), item["link"])
-            last_sc_day = today
             print("[SC MIX] Posted: " + item["title"][:60])
 
 def auto_post_track():
@@ -874,15 +930,14 @@ def auto_post_track():
     today = now.date()
     hour = now.hour
     # Publica a las 12:00 PM cada dia
-    if hour == 12 and last_track_day != today:
+    if hour == 12 and now.minute == 0 and last_track_day != today:
         cid = load()
         if cid:
+            last_track_day = today  # Set first to prevent double-posting
             t = get_daily_track()
             send(int(cid), format_track(t))
-            result = send(int(cid), t["url"])
-            if result and result.get("ok"):
-                last_track_day = today
-                print("[TRACK] Track of the day posted: " + t["title"])
+            send(int(cid), t["url"])
+            print("[TRACK] Track of the day posted: " + t["title"])
 
 def main():
     print("==================================================")
@@ -911,12 +966,13 @@ def main():
                     off = u["update_id"] + 1
                     if "message" in u:
                         handle(u["message"])
+            time.sleep(60)  # Check auto-posts every 60 seconds
         except KeyboardInterrupt:
             print("Detenido.")
             break
         except Exception as e:
             print("[ERR] " + str(e))
-            time.sleep(5)
+            time.sleep(30)
 
 if __name__ == "__main__":
     main()
