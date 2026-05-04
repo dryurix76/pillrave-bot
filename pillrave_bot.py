@@ -282,6 +282,160 @@ TRACKS = [
     },
 ]
 
+# ─── WEB SECTIONS ROTATION ────────────────────────────────────
+WEB_SECTIONS = [
+    {
+        "title": "THE PILLRAVE MISSION",
+        "content": (
+            "La nostalgia del 99, defrosted to heal the economy of 2026.\n\n"
+            "Real infrastructure. Direct value to the artist.\n\n"
+            "PILLRAVE is not a promise. We are the cure so value returns to its origin.\n\n"
+            "In the 90s, police were shutting clubs at 2 AM.\n"
+            "The Berkshire Mountains offered freedom to dance under the stars\n"
+            "without anyone knocking on the door.\n\n"
+            "That energy never died. It was frozen.\n"
+            "Today we defrost it — with code, with community, with $PILL.\n\n"
+            "Welcome to the resistance. The signal is back.\n\n"
+            "🌐 cyberavers.online"
+        ),
+        "url": "https://cyberavers.online"
+    },
+    {
+        "title": "THE $PILL TOKEN",
+        "content": (
+            "909M SUPPLY // SOLANA // THE UNDERGROUND TOKEN\n\n"
+            "Public Sale: 80% — 727.2M tokens\n"
+            "Team & Dev: 15% — 136.35M (12-month vesting)\n"
+            "Airdrops & Rewards: 10% — 90.9M tokens\n\n"
+            "100% fair distribution.\n"
+            "No locked team wallets. No manipulation.\n"
+            "The PILL is the cure to the chaos of the scene.\n\n"
+            "Live now on Pump.fun:\n"
+            "https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+        ),
+        "url": "https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+    },
+    {
+        "title": "PILLRAVE DAO — GOVERNANCE BY THE GRID",
+        "content": (
+            "Tired of labels deciding what you hear and what artists earn?\n\n"
+            "The DAO is your all-access pass to run the club.\n\n"
+            "TIER 1 — VIBE CHECKER\n"
+            "Hold any $PILL → Vote on polls, Discord access, early drops\n\n"
+            "TIER 2 — RESIDENT\n"
+            "Stake 30+ days → Propose app changes, nominate artists\n\n"
+            "TIER 3 — FOUNDING OG\n"
+            "Stake 90+ days → Full treasury access, DAO Council seat\n\n"
+            "The longer you stay in the after, the more say you get in the set.\n\n"
+            "🌐 cyberavers.online/dao"
+        ),
+        "url": "https://cyberavers.online"
+    },
+    {
+        "title": "HOW TO SECURE THE PILL",
+        "content": (
+            "[ TRANSMISSION RECOVERED - LATE NIGHT SOCIETY ]\n\n"
+            "In 1992, electronic music was not a business — it was a code of freedom.\n"
+            "We were called CyberRavers because we understood that technology\n"
+            "should serve the dancefloor, not the other way around.\n\n"
+            "PILLRAVE has evolved from NFTs to real infrastructure:\n"
+            "an ecosystem where music in motion rewards directly those who create it.\n\n"
+            "STEP 1 — Connect your Phantom or Solflare wallet\n"
+            "STEP 2 — Go to Pump.fun via the official link\n"
+            "STEP 3 — Choose your $PILL amount\n"
+            "STEP 4 — HOLD & GOVERN: once the token graduates to Raydium,\n"
+            "your PILL becomes the governance key for the DAO\n\n"
+            "🔗 https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+        ),
+        "url": "https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+    },
+    {
+        "title": "THE PILLRAVE APP — SHAZAM FOR UNDERGROUND MUSIC",
+        "content": (
+            "You're on the dancefloor. A track drops.\n"
+            "You don't know what it is — but you need it.\n\n"
+            "The PILLRAVE app identifies it in real time.\n"
+            "The producer gets paid. You earn $PILL.\n\n"
+            "HOW IT WORKS:\n"
+            "🎵 You hear a track → App identifies it\n"
+            "💰 Producer receives royalties automatically on-chain\n"
+            "💊 You earn $PILL for the identification\n"
+            "🗳️ Accumulate $PILL → Govern the protocol\n\n"
+            "This is not streaming. This is the underground rewired.\n\n"
+            "App launching Q3 2026.\n"
+            "🌐 cyberavers.online"
+        ),
+        "url": "https://cyberavers.online"
+    },
+    {
+        "title": "PILLRAVE ROADMAP",
+        "content": (
+            "PHASE 0 — NOW\n"
+            "✅ Token live on Solana via Pump.fun\n"
+            "✅ Website and branding active\n"
+            "✅ Telegram community live\n\n"
+            "PHASE 1 — Q3 2026\n"
+            "📱 iOS/Android app demo\n"
+            "🎁 First airdrops to holders\n"
+            "🎪 First pilot festival\n\n"
+            "PHASE 2 — Q1 2027\n"
+            "📈 Active staking (The After)\n"
+            "🎛️ Producers dashboard live\n"
+            "🗳️ DAO fully launched\n\n"
+            "PHASE 3 — 2027+\n"
+            "🌍 Major international festivals\n"
+            "📱 Global public app launch\n"
+            "🎵 Global royalties standard\n\n"
+            "The curve is filling. Get in before the After opens.\n"
+            "🔗 https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+        ),
+        "url": "https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump"
+    },
+    {
+        "title": "PILLRAVE — A CULTURAL AND TECHNICAL EXPERIMENT",
+        "content": (
+            "The true law is the rhythm,\n"
+            "but we respect the code of the network.\n\n"
+            "PILLRAVE is not a hype train. It is a mission.\n\n"
+            "treasury.supply = 15%\n"
+            "treasury.control = DAO_ONLY\n"
+            "intervention.manual = false\n"
+            "cyberavers.override = false\n\n"
+            "Every vote is public on the Explorer.\n"
+            "Zero backroom deals.\n"
+            "Zero manipulation.\n\n"
+            "The code is the DJ.\n"
+            "The dancefloor is the blockchain.\n"
+            "And you are the Promoter.\n\n"
+            "Step up and take control of the culture.\n\n"
+            "🌐 cyberavers.online\n"
+            "📱 @CYBERRAVERS"
+        ),
+        "url": "https://cyberavers.online"
+    },
+]
+
+last_web_section_day = None
+web_section_index = 0
+
+def auto_post_web_section():
+    global last_web_section_day, web_section_index
+    now = datetime.now()
+    today = now.date()
+    hour = now.hour
+    minute = now.minute
+    # Post at 3 PM daily
+    if hour == 15 and minute == 0 and last_web_section_day != today:
+        cid = load()
+        if not cid:
+            return
+        last_web_section_day = today
+        section = WEB_SECTIONS[web_section_index % len(WEB_SECTIONS)]
+        web_section_index += 1
+        msg = "📡 " + section["title"] + "\n\n" + section["content"]
+        send(int(cid), msg)
+        print("[WEB] Posted section: " + section["title"])
+
 WELCOME = ("[ CONNECTION ESTABLISHED ] 📶\n\n"
 "Welcome to the Late Night Society headquarters, Operator.\n\n"
 "You have bypassed the static and entered the core of the "
@@ -297,7 +451,7 @@ WELCOME = ("[ CONNECTION ESTABLISHED ] 📶\n\n"
 "3. Verify the Stack. Check the pinned legal docs before engaging.\n\n"
 "The night is long. The signal is pure.\n\n"
 "💊 [ TAKE THE PILL ]\n\n"
-"Commands: /token /roadmap /buy /info /web /track /mix /news /price /dao /launch /safety")
+"Commands: /token /roadmap /buy /info /web /track /mix /news /price /dao /launch /safety\n\n""💊 Buy now: https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump")
 
 MSGS = {
 "info": ("THE FROZEN ARE BACK\n\n"
@@ -414,6 +568,27 @@ MSGS = {
 "And you are the Promoter. Step up and take control of the culture."
 ),
 
+
+"daily_pump": (
+"💊 $PILL IS LIVE ON PUMP.FUN\n\n"
+"The PILLRAVE protocol is officially deployed on Solana.\n"
+"This is a 100% fair launch — no insiders, no private rounds,\n"
+"no locked team wallets.\n\n"
+"WHY $PILL?\n"
+"- Real utility: powers the audio ID protocol and DAO\n"
+"- 909M total supply — no inflation\n"
+"- Fair distribution: 80% public, 15% team vesting, 10% airdrops\n"
+"- Once the bond curve is met: staking and DAO governance go live\n\n"
+"HOW TO BUY:\n"
+"1. Get a Solana wallet (Phantom or Solflare)\n"
+"2. Add SOL for gas\n"
+"3. Hit the link below and buy $PILL\n\n"
+"The signal is live. The floor is open.\n"
+"Secure your position before the curve is met.\n\n"
+"🔗 https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump\n"
+"🌐 cyberavers.online\n\n"
+"#PILLRAVE #Solana #PumpFun #FairLaunch #Web3Music"
+),
 "launch": (
 "[ SYSTEM DEPLOYED // THE ANTIDOTE IS HERE ] 💊\n\n"
 "The wait is over. The PILLRAVE protocol is now officially live on the Grid.\n"
@@ -622,11 +797,14 @@ last_news_time = None
 
 def fetch_rss(url):
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "PillRaveBot/1.0"})
-        with urllib.request.urlopen(req, timeout=10) as r:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (compatible; PillRaveBot/1.0)",
+            "Accept": "application/rss+xml, application/xml, text/xml, */*"
+        })
+        with urllib.request.urlopen(req, timeout=15) as r:
             return r.read().decode("utf-8", errors="ignore")
     except Exception as e:
-        print("[RSS ERR] " + url + " -> " + str(e))
+        print("[RSS ERR] " + url.split("/")[2] + " -> " + str(e)[:60])
         return ""
 
 def parse_rss(xml):
@@ -811,6 +989,38 @@ def handle(msg):
     txt = msg.get("text", "")
     if not txt:
         return
+
+    # ─── Auto-reply keywords ──────────────────────────────────
+    txt_lower = txt.lower()
+    keyword_replies = {
+        "when launch": "The PILLRAVE protocol is LIVE now on Pump.fun! Use /launch for details.",
+        "when moon": "The moon is the floor, Operator. Focus on utility. Use /token to understand the protocol.",
+        "wen": "It's already live. Use /launch to check the status.",
+        "rug": "100% fair launch. No locked team wallets. No private rounds. Use /safety for the full security guide.",
+        "scam": "PILLRAVE is a verified fair launch on Solana. Use /safety for full security info.",
+        "contract": f"Official contract: https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump — Always verify on official channels.",
+        "ca ": f"Official CA: https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump",
+        "buy": "Use /buy for step-by-step instructions. Direct link: https://pump.fun/coin/6uCaWNvRTUExSMM6qnFF2uujcRVWXbRwL9eFSUdJpump",
+        "how to": "Use /buy for purchase guide, /dao for governance, /token for tokenomics.",
+        "price": "Use /price for live SOL and BTC prices. $PILL is currently on the bonding curve at pump.fun.",
+        "staking": "Staking (The After) launches once the bond curve is met. Use /tiers for tier details.",
+        "airdrop": "Airdrops & rewards = 10% of total supply (90.9M $PILL). Use /token for full distribution.",
+        "whitepaper": "Read our full documentation at cyberavers.online",
+        "website": "Official site: cyberavers.online",
+        "twitter": "Follow us: https://x.com/CyberRaversNFT",
+        "instagram": "Follow us: https://instagram.com/cybarravers",
+        "gm": "GM Operator. The grid is live. 💊",
+        "gn": "GN Operator. The signal never sleeps. 💊",
+        "wagmi": "WAGMI. The protocol is live. Stay decentralized. 💊",
+        "ngmi": "Don't say that. Read /info and understand the mission. 💊",
+        "lfg": "LFG! Protocol is live. Use /launch for the full status. 🚀",
+    }
+
+    for keyword, reply in keyword_replies.items():
+        if keyword in txt_lower and not txt_lower.startswith("/"):
+            send(cid, reply)
+            return
+
     txt = txt.strip().split("@")[0].lower()
     print("[MSG] " + user + ": " + txt)
     if not load():
@@ -848,14 +1058,12 @@ def handle(msg):
         item = fetch_sc_mix()
         if item:
             SC_POSTED.add(item["link"])
-            send(cid, format_sc_mix(item))
-            send(cid, item["link"])
+            send(cid, format_sc_mix(item) + "\n\n" + item["link"])
         else:
             send(cid, "Could not fetch the mix. Try again later.")
     elif txt in ("/track", "/dailytrack"):
         t = get_daily_track()
-        send(cid, format_track(t))
-        send(cid, t["url"])
+        send(cid, format_track(t) + "\n\n" + t["url"])
     elif txt in ("/blast", "/announce_all"):
         # Post full launch sequence to group
         c = load()
@@ -865,6 +1073,12 @@ def handle(msg):
             import time as _t; _t.sleep(2)
             send_menu(int(c), MSGS["safety"])
             send(cid, "Blast sent to group.")
+    elif txt in ("/section", "/web_post", "/featured"):
+        section = WEB_SECTIONS[web_section_index % len(WEB_SECTIONS)]
+        msg = "📡 " + section["title"] + "\n\n" + section["content"]
+        send(cid, msg)
+    elif txt in ("/pill", "/buypill", "/token_link"):
+        send(cid, MSGS["daily_pump"])
     elif txt in ("/launch", "/live", "/protocol"):
         send_menu(cid, MSGS["launch"])
         send(cid, "https://www.youtube.com/watch?v=BDj73pGQ6pE")
@@ -889,22 +1103,28 @@ def fetch_sc_mix():
     try:
         xml = fetch_rss(SC_RSS)
         if not xml:
+            print("[SC] Empty response from RSS")
             return None
+        print("[SC] RSS fetched, length: " + str(len(xml)))
         items = parse_rss(xml)
+        print("[SC] Items parsed: " + str(len(items)))
         if items:
+            print("[SC] First item: " + items[0].get("title","?")[:50])
             return items[0]
+        # Try alternate parsing for SoundCloud format
+        import re as _re
+        links = _re.findall(r'<enclosure url="([^"]+)"', xml)
+        titles = _re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', xml)
+        if links and len(titles) > 1:
+            return {"title": titles[1], "link": links[0], "desc": ""}
         return None
     except Exception as e:
         print("[SC ERR] " + str(e))
         return None
 
 def format_sc_mix(item):
-    return (
-        "🎧 MIX OF THE DAY — The Classic Mix CD Series\n\n"
-        + item["title"] + "\n\n"
-        + item["desc"][:200] + "\n\n"
-        + "#classicmix #underground #rave #pillrave"
-    )
+    # Return only a short header — the URL generates the rich preview
+    return "🎧 MIX OF THE DAY — The Classic Mix CD Series"
 
 def auto_post_sc_mix():
     global last_sc_day
@@ -920,9 +1140,31 @@ def auto_post_sc_mix():
         item = fetch_sc_mix()
         if item and item["link"] not in SC_POSTED:
             SC_POSTED.add(item["link"])
-            send(int(cid), format_sc_mix(item))
-            send(int(cid), item["link"])
+            send(int(cid), format_sc_mix(item) + "\n\n" + item["link"])
             print("[SC MIX] Posted: " + item["title"][:60])
+
+def auto_post_daily_pump():
+    global last_price_day
+    # Reuse last_price_day logic but for a different hour (6 PM)
+    # Use a separate tracker
+    pass  # handled below
+
+last_pump_day = None
+
+def auto_post_pump():
+    global last_pump_day
+    now = datetime.now()
+    today = now.date()
+    hour = now.hour
+    minute = now.minute
+    # Post daily pump message at 6 PM
+    if hour == 18 and minute == 0 and last_pump_day != today:
+        cid = load()
+        if not cid:
+            return
+        last_pump_day = today
+        send(int(cid), MSGS["daily_pump"])
+        print("[PUMP] Daily pump message posted")
 
 def auto_post_track():
     global last_track_day
@@ -935,8 +1177,7 @@ def auto_post_track():
         if cid:
             last_track_day = today  # Set first to prevent double-posting
             t = get_daily_track()
-            send(int(cid), format_track(t))
-            send(int(cid), t["url"])
+            send(int(cid), format_track(t) + "\n\n" + t["url"])
             print("[TRACK] Track of the day posted: " + t["title"])
 
 def main():
@@ -960,6 +1201,8 @@ def main():
             auto_post_news()
             auto_post_sc_mix()
             auto_post_prices()
+            auto_post_pump()
+            auto_post_web_section()
             r = get_upd(off)
             if r and r.get("ok"):
                 for u in r["result"]:
