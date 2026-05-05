@@ -433,7 +433,7 @@ def auto_post_web_section():
         section = WEB_SECTIONS[web_section_index % len(WEB_SECTIONS)]
         web_section_index += 1
         msg = "📡 " + section["title"] + "\n\n" + section["content"]
-        send(int(cid), msg)
+        send_all(msg)
         print("[WEB] Posted section: " + section["title"])
 
 WELCOME = ("[ CONNECTION ESTABLISHED ] 📶\n\n"
@@ -664,6 +664,11 @@ RSS_FEEDS = [
 
 # SoundCloud: The Classic Mix CD Series (user ID: 70548)
 SC_RSS = "https://feeds.soundcloud.com/users/soundcloud:users:70548/sounds.rss"
+
+# Mixcloud: acid-ted
+MC_RSS = "https://www.mixcloud.com/acid-ted/feed/"
+MC_POSTED = set()
+last_mc_day = None
 SC_POSTED = set()
 last_sc_day = None
 
@@ -714,7 +719,7 @@ def auto_post_prices():
         last_price_day = today  # Set first to prevent double-posting
         p = fetch_prices()
         if p:
-            send(int(cid), format_prices(p))
+            send_all(format_prices(p))
             print("[PRICE] Prices posted: SOL=$" + str(p["sol"]) + " BTC=$" + str(p["btc"]))
 
 BANDCAMP_FEEDS = [
@@ -884,8 +889,7 @@ def auto_post_news():
         return
     item = items[0]
     posted_urls.add(item["link"])
-    send(int(cid), format_news(item))
-    send(int(cid), item["link"])
+    send_all(format_news(item) + "\n\n" + item["link"])
     last_news_time = now
     print("[NEWS] Posted: " + item["title"][:60])
 
@@ -930,10 +934,12 @@ def send_menu(cid, txt):
         "disable_web_page_preview": False,
         "reply_markup": {
             "inline_keyboard": [
-                [{"text": "BUY PILLRAVE", "url": PUMP_URL},
-                 {"text": "WEBSITE",   "url": WEB_URL}],
-                [{"text": "Instagram", "url": "https://instagram.com/cybarravers"},
-                 {"text": "Twitter/X", "url": "https://x.com/CyberRaversNFT"}]
+                [{"text": "💊 BUY PILLRAVE", "url": PUMP_URL},
+                 {"text": "🌐 WEBSITE",      "url": WEB_URL}],
+                [{"text": "📱 Instagram", "url": "https://instagram.com/cybarravers"},
+                 {"text": "🐦 Twitter/X", "url": "https://x.com/CyberRaversNFT"}],
+                [{"text": "🎧 SoundCloud", "url": "https://soundcloud.com/cyberavers-pillrave"},
+                 {"text": "🎵 Mixcloud",   "url": "https://www.mixcloud.com/acid-ted"}]
             ]
         }
     })
@@ -955,15 +961,21 @@ def get_upd(off=None):
 saved = None
 last_track_day = None
 
+all_chats = set()
+
 def save(cid):
     global saved
     saved = str(cid)
+    all_chats.add(str(cid))
     try:
         with open("/tmp/pillcid.txt", "w") as f:
             f.write(str(cid))
+        # Save all chats
+        with open("/tmp/allchats.txt", "w") as f:
+            f.write("\n".join(all_chats))
     except:
         pass
-    print("[INFO] Chat ID guardado: " + str(cid))
+    print("[INFO] Chat ID saved: " + str(cid))
 
 def load():
     global saved
@@ -972,9 +984,42 @@ def load():
     try:
         with open("/tmp/pillcid.txt") as f:
             saved = f.read().strip()
-            return saved
+        # Load all chats
+        try:
+            with open("/tmp/allchats.txt") as f:
+                for line in f.read().strip().split("\n"):
+                    if line.strip():
+                        all_chats.add(line.strip())
+        except:
+            if saved:
+                all_chats.add(saved)
+        return saved
     except:
         return None
+
+def get_all_chats():
+    load()
+    return list(all_chats) if all_chats else ([saved] if saved else [])
+
+def send_all(txt):
+    chats = get_all_chats()
+    for cid in chats:
+        try:
+            call("sendMessage", {"chat_id": int(cid), "text": txt})
+        except Exception as e:
+            print("[ERR] send_all " + str(cid) + ": " + str(e))
+
+def send_all(text, use_menu=False):
+    """Send a message to ALL registered groups."""
+    targets = list(all_chats) if all_chats else ([saved] if saved else [])
+    for cid in targets:
+        try:
+            if use_menu:
+                send_menu(int(cid), text)
+            else:
+                send(int(cid), text)
+        except Exception as e:
+            print("[BROADCAST ERR] " + str(cid) + ": " + str(e))
 
 def handle(msg):
     cid = msg["chat"]["id"]
@@ -1044,8 +1089,7 @@ def handle(msg):
         if items:
             item = items[0]
             posted_urls.add(item["link"])
-            send(cid, format_news(item))
-            send(cid, item["link"])
+            send(cid, format_news(item) + "\n\n" + item["link"])
         else:
             send(cid, "No relevant news found at this time. Try again later.")
     elif txt in ("/price", "/sol", "/btc"):
@@ -1054,6 +1098,13 @@ def handle(msg):
             send(cid, format_prices(p))
         else:
             send(cid, "Could not fetch prices. Try again later.")
+    elif txt in ("/mixcloud", "/acidted", "/mc"):
+        item = fetch_mc_mix()
+        if item:
+            MC_POSTED.add(item["link"])
+            send(cid, format_mc_mix(item) + "\n\n" + item["link"])
+        else:
+            send(cid, "Could not fetch Mixcloud mix. Try again later.")
     elif txt in ("/mix", "/dailymix"):
         item = fetch_sc_mix()
         if item:
@@ -1073,6 +1124,13 @@ def handle(msg):
             import time as _t; _t.sleep(2)
             send_menu(int(c), MSGS["safety"])
             send(cid, "Blast sent to group.")
+    elif txt in ("/acidted", "/mixcloud", "/mc"):
+        item = fetch_mc_mix()
+        if item:
+            MC_POSTED.add(item["link"])
+            send(cid, format_mc_mix(item) + "\n\n" + item["link"])
+        else:
+            send(cid, "Could not fetch Mixcloud mix. Try again later.")
     elif txt in ("/section", "/web_post", "/featured"):
         section = WEB_SECTIONS[web_section_index % len(WEB_SECTIONS)]
         msg = "📡 " + section["title"] + "\n\n" + section["content"]
@@ -1098,6 +1156,39 @@ def handle(msg):
         c = load()
         if c:
             send(int(c), "ANNOUNCEMENT\n\n" + msg.get("text", "")[10:])
+
+def fetch_mc_mix():
+    try:
+        xml = fetch_rss(MC_RSS)
+        if not xml:
+            print("[MC] Empty RSS response")
+            return None
+        items = parse_rss(xml)
+        print("[MC] Items parsed: " + str(len(items)))
+        if items:
+            return items[0]
+        return None
+    except Exception as e:
+        print("[MC ERR] " + str(e))
+        return None
+
+def format_mc_mix(item):
+    return "🎚️ ACID TED MIX — Mixcloud\n\n" + item["title"]
+
+def auto_post_mc_mix():
+    global last_mc_day
+    now = datetime.now()
+    today = now.date()
+    if now.hour == 22 and now.minute == 0 and last_mc_day != today:
+        cid = load()
+        if not cid:
+            return
+        last_mc_day = today
+        item = fetch_mc_mix()
+        if item and item["link"] not in MC_POSTED:
+            MC_POSTED.add(item["link"])
+            send_all(format_mc_mix(item) + "\n\n" + item["link"])
+            print("[MC MIX] Posted: " + item["title"][:60])
 
 def fetch_sc_mix():
     try:
@@ -1140,7 +1231,7 @@ def auto_post_sc_mix():
         item = fetch_sc_mix()
         if item and item["link"] not in SC_POSTED:
             SC_POSTED.add(item["link"])
-            send(int(cid), format_sc_mix(item) + "\n\n" + item["link"])
+            send_all(format_sc_mix(item) + "\n\n" + item["link"])
             print("[SC MIX] Posted: " + item["title"][:60])
 
 def auto_post_daily_pump():
@@ -1148,6 +1239,44 @@ def auto_post_daily_pump():
     # Reuse last_price_day logic but for a different hour (6 PM)
     # Use a separate tracker
     pass  # handled below
+
+last_pump_day = None
+
+def fetch_mc_mix():
+    try:
+        xml = fetch_rss(MC_RSS)
+        if not xml:
+            print("[MC] Empty response")
+            return None
+        items = parse_rss(xml)
+        if items:
+            print("[MC] Got: " + items[0].get("title","?")[:50])
+            return items[0]
+        return None
+    except Exception as e:
+        print("[MC ERR] " + str(e))
+        return None
+
+def format_mc_mix(item):
+    return "🎧 ACID TED MIX — Mixcloud\n\n" + item["title"]
+
+def auto_post_mc_mix():
+    global last_mc_day
+    now = datetime.now()
+    today = now.date()
+    hour = now.hour
+    minute = now.minute
+    # Post Mixcloud mix at 10 PM daily
+    if hour == 22 and minute == 0 and last_mc_day != today:
+        cid = load()
+        if not cid:
+            return
+        last_mc_day = today
+        item = fetch_mc_mix()
+        if item and item["link"] not in MC_POSTED:
+            MC_POSTED.add(item["link"])
+            send_all(format_mc_mix(item) + "\n\n" + item["link"])
+            print("[MC] Posted: " + item["title"][:60])
 
 last_pump_day = None
 
@@ -1163,7 +1292,7 @@ def auto_post_pump():
         if not cid:
             return
         last_pump_day = today
-        send(int(cid), MSGS["daily_pump"])
+        send_all(MSGS["daily_pump"])
         print("[PUMP] Daily pump message posted")
 
 def auto_post_track():
@@ -1177,7 +1306,7 @@ def auto_post_track():
         if cid:
             last_track_day = today  # Set first to prevent double-posting
             t = get_daily_track()
-            send(int(cid), format_track(t) + "\n\n" + t["url"])
+            send_all(format_track(t) + "\n\n" + t["url"])
             print("[TRACK] Track of the day posted: " + t["title"])
 
 def main():
@@ -1203,6 +1332,8 @@ def main():
             auto_post_prices()
             auto_post_pump()
             auto_post_web_section()
+            auto_post_mc_mix()
+            auto_post_mc_mix()
             r = get_upd(off)
             if r and r.get("ok"):
                 for u in r["result"]:
