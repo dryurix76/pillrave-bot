@@ -304,8 +304,8 @@ WEB_SECTIONS = [
         "title": "THE $PILL TOKEN",
         "content": (
             "909M SUPPLY // SOLANA // THE UNDERGROUND TOKEN\n\n"
-            "Public Sale: 80% — 727.2M tokens\n"
-            "Team & Dev: 15% — 136.35M (12-month vesting)\n"
+            "Public Sale: 70% — 636.3M tokens\n"
+            "Team & Dev: 20% — 181.8M (12-month vesting)\n"
             "Airdrops & Rewards: 10% — 90.9M tokens\n\n"
             "100% fair distribution.\n"
             "No locked team wallets. No manipulation.\n"
@@ -463,8 +463,8 @@ MSGS = {
 "The signal is back.\n\n"
 "Berkshire Mountain, MA - 12.31.1999 - 06:13 AM"),
 "token": ("TOKENOMICS $PILL\n\n"
-"Public sale: 80% - 727.2M tokens\n"
-"Team & Dev: 15% - 136.35M (12-month vesting)\n"
+"Public sale: 70% - 636.3M tokens\n"
+"Team & Dev: 20% - 181.8M (12-month vesting)\n"
 "Airdrops & Rewards: 10% - 90.9M tokens\n\n"
 "Total supply: 909,000,000 $PILL\n"
 "Blockchain: Solana\n"
@@ -939,7 +939,9 @@ def send_menu(cid, txt):
                 [{"text": "📱 Instagram", "url": "https://instagram.com/cybarravers"},
                  {"text": "🐦 Twitter/X", "url": "https://x.com/CyberRaversNFT"}],
                 [{"text": "🎧 SoundCloud", "url": "https://soundcloud.com/cyberavers-pillrave"},
-                 {"text": "🎵 Mixcloud",   "url": "https://www.mixcloud.com/acid-ted"}]
+                 {"text": "🎚️ Mixcloud",   "url": "https://www.mixcloud.com/acid-ted"}],
+                [{"text": "🧬 ACID TED",   "url": "https://cyberavers.online/acidted.html"},
+                 {"text": "🏛️ DAO",        "url": "https://cyberavers.online/dao/daopillrave.html"}]
             ]
         }
     })
@@ -1061,10 +1063,12 @@ def handle(msg):
         "lfg": "LFG! Protocol is live. Use /launch for the full status. 🚀",
     }
 
-    for keyword, reply in keyword_replies.items():
-        if keyword in txt_lower and not txt_lower.startswith("/"):
-            send(cid, reply)
-            return
+    # Only fire keyword replies for plain messages, not commands
+    if not txt_lower.strip().startswith("/"):
+        for keyword, reply in keyword_replies.items():
+            if keyword in txt_lower:
+                send(cid, reply)
+                return
 
     txt = txt.strip().split("@")[0].lower()
     print("[MSG] " + user + ": " + txt)
