@@ -1084,6 +1084,10 @@ def handle(msg):
         send(cid, WEB_URL)
     elif txt == "/chatid":
         send(cid, "Chat ID: " + str(cid))
+    elif txt == "/debug":
+        load()
+        chats_info = "Registered chats: " + str(list(all_chats)) + "\nCurrent: " + str(cid) + "\nSaved: " + str(saved)
+        send(cid, chats_info)
     elif txt == "/news":
         items = get_news()
         if items:
@@ -1309,6 +1313,8 @@ def auto_post_track():
             send_all(format_track(t) + "\n\n" + t["url"])
             print("[TRACK] Track of the day posted: " + t["title"])
 
+processed_updates = set()
+
 def main():
     print("==================================================")
     print("  PILLRAVE BOT - Railway Edition")
@@ -1339,7 +1345,12 @@ def main():
                 for u in r["result"]:
                     off = u["update_id"] + 1
                     if "message" in u:
-                        handle(u["message"])
+                        uid = u["update_id"]
+                        if uid not in processed_updates:
+                            processed_updates.add(uid)
+                            if len(processed_updates) > 1000:
+                                processed_updates.clear()
+                            handle(u["message"])
             time.sleep(60)  # Check auto-posts every 60 seconds
         except KeyboardInterrupt:
             print("Detenido.")
