@@ -967,17 +967,21 @@ all_chats = set()
 
 def save(cid):
     global saved
+    cid_int = int(cid)
     saved = str(cid)
-    all_chats.add(str(cid))
+    # Only register GROUP chats for broadcast (negative IDs)
+    # Private chats (positive IDs) are excluded from send_all
+    if cid_int < 0:
+        all_chats.add(str(cid))
     try:
         with open("/tmp/pillcid.txt", "w") as f:
             f.write(str(cid))
-        # Save all chats
         with open("/tmp/allchats.txt", "w") as f:
             f.write("\n".join(all_chats))
     except:
         pass
-    print("[INFO] Chat ID saved: " + str(cid))
+    chat_type = "GROUP" if cid_int < 0 else "PRIVATE"
+    print("[INFO] Chat saved: " + str(cid) + " (" + chat_type + ")")
 
 def load():
     global saved
@@ -990,10 +994,10 @@ def load():
         try:
             with open("/tmp/allchats.txt") as f:
                 for line in f.read().strip().split("\n"):
-                    if line.strip():
+                    if line.strip() and int(line.strip()) < 0:
                         all_chats.add(line.strip())
         except:
-            if saved:
+            if saved and int(saved) < 0:
                 all_chats.add(saved)
         return saved
     except:
@@ -1002,14 +1006,6 @@ def load():
 def get_all_chats():
     load()
     return list(all_chats) if all_chats else ([saved] if saved else [])
-
-def send_all(txt):
-    chats = get_all_chats()
-    for cid in chats:
-        try:
-            call("sendMessage", {"chat_id": int(cid), "text": txt})
-        except Exception as e:
-            print("[ERR] send_all " + str(cid) + ": " + str(e))
 
 def send_all(text, use_menu=False):
     """Send a message to ALL registered groups."""
